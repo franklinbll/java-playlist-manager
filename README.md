@@ -58,4 +58,4 @@ The included `Playlists.txt` file is used to store playlist data between runs.
 
 ## Background
 
-This project began as a Java programming assignment in 2024. I later returned to it to clean up the code and refactor parts of the application while reviewing the Java concepts used throughout the project.
+This project began as a Java programming assignment in 2024. I later returned to it to clean up the code and refactor parts of the application while reviewing the Java concepts used throughout the project. The updated version was published to GitHub in 2026.
