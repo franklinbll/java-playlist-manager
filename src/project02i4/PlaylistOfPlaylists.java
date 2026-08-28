@@ -1,6 +1,6 @@
 package project02i4;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 /** Represents a collection of playlists. */
@@ -9,7 +9,7 @@ public class PlaylistOfPlaylists {
     private final List<Playlist> playlistList;
 
     public PlaylistOfPlaylists() {
-        playlistList = new LinkedList<>();
+        playlistList = new ArrayList<>();
     }
 
     public boolean isInListOfPlaylists(String name) {

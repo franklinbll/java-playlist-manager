@@ -1,8 +1,8 @@
 package project02i4;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class Playlist {
     // Constructor to initialize a Playlist object with a name
     public Playlist(String name) {
         this.name = name; 
-        songList = new LinkedList<>(); 
+        songList = new ArrayList<>(); 
     }
     public String getName() {
         return name;
