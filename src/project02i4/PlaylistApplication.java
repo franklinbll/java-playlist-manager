@@ -35,7 +35,7 @@ public class PlaylistApplication {
                     showLicensingInformation();
                     break;
                 case 5:
-                    saveAndExit();
+                    saveChanges();
                     running = false;
                     break;
                 default:
@@ -123,14 +123,17 @@ public class PlaylistApplication {
                 break;
             case 3:
                 playlist.sortByTitle();
+                saveChanges();
                 showSortedPlaylist(playlist, "TITLE");
                 break;
             case 4:
                 playlist.sortByArtist();
+                saveChanges();
                 showSortedPlaylist(playlist, "ARTIST");
                 break;
             case 5:
                 playlist.sortByDuration();
+                saveChanges();
                 showSortedPlaylist(playlist, "DURATION");
                 break;
             default:
@@ -159,11 +162,18 @@ public class PlaylistApplication {
             } while (!Song.isValidDuration(duration));
 
             Song newSong = new Song(title, artist, duration);
-            playlist.addSong(newSong);
 
-            System.out.println("This is gonna be the song that will be added: "
-                    + title + " by " + artist);
-            System.out.println();
+            if (!newSong.isRestricted()) {
+                System.out.println("This is gonna be the song that will be added: "
+                        + title + " by " + artist);
+                System.out.println();
+
+                playlist.addSong(newSong);
+                saveChanges();
+            } else {
+                System.out.println("This song cannot be added because the artist is restricted.");
+                System.out.println();
+            }
 
             System.out.println("Do you want to keep adding songs?");
             System.out.println("1. Yes");
@@ -198,6 +208,7 @@ public class PlaylistApplication {
                     playlist.getNumberOfSongs());
 
             playlist.removeSongAtIndex(songNumber - 1);
+            saveChanges();
             System.out.println();
 
             if (playlist.getNumberOfSongs() == 0) {
@@ -244,6 +255,8 @@ public class PlaylistApplication {
             }
 
             currentPlaylists.addPlaylist(new Playlist(name));
+            saveChanges();
+
             System.out.println("Your new playlist has been added successfully. Back to the main menu...");
             System.out.println();
             return;
@@ -262,9 +275,10 @@ public class PlaylistApplication {
                 currentPlaylists.getNumberOfPlaylists());
 
         Playlist playlist = currentPlaylists.getPlaylistByIndex(playlistNumber - 1);
-        System.out.print(playlist.getName() + " has been removed. ");
 
         currentPlaylists.removePlaylistByIndex(playlistNumber - 1);
+        saveChanges();
+        System.out.print(playlist.getName() + " has been removed. ");
 
         System.out.println("Back to main menu...");
         System.out.println();
@@ -273,13 +287,13 @@ public class PlaylistApplication {
     private void showLicensingInformation() {
         System.out.println("We don't have the rights to store tracks by these artists: ");
         System.out.println(Song.getRestrictedArtists());
-        System.out.println("All songs by these creators will be deleted when the program ends.");
+        System.out.println("Songs by these artists cannot be added to playlists.");
         System.out.println("We apologize for the inconvenience. Our teams are working to get their rights.");
         System.out.println("BACK TO MAIN...");
         System.out.println();
     }
 
-    private void saveAndExit() {
+    private void saveChanges() {
         currentPlaylists.removeRestrictedSongs();
         IOHandling.writePlaylistsToFile(currentPlaylists, "Playlists.txt");
     }
