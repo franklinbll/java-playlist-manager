@@ -8,9 +8,9 @@ A command-line playlist management application written in Java. I originally cre
 - Add and delete songs
 - Sort songs by title, artist, or duration
 - Simulate playing a playlist in the console
-- Save playlist data to a text file and load it again when the program starts
+- Automatically save playlist changes to a text file and load them when the program starts
 - Validate menu input and song durations
-- Remove songs by restricted artists before saving
+- Prevent songs by restricted artists from being added to playlists
 
 > **Note:** This project does not play audio files. Playback is simulated with console output.
 
@@ -18,7 +18,7 @@ A command-line playlist management application written in Java. I originally cre
 
 - Object-oriented programming and composition
 - Instance and static members
-- Java collections (`List` and `LinkedList`)
+- Java collections (`List` and `ArrayList`)
 - `Comparable` and `Comparator`
 - Iterators
 - File I/O
