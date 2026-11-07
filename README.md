@@ -75,15 +75,15 @@ Songs are saved as comma-separated fields, with one playlist per line: the playl
 
 ### Main Menu
 
-![Main menu showing playlists and durations](screenshots/main-menu.png.jpg)
+![Main menu showing playlists and durations](screenshots/main-menu.jpg)
 
 ### Playlist Management
 
-![Playlist management and editing options](screenshots/playlist-management.png.jpg)
+![Playlist management and editing options](screenshots/playlist-management.jpg)
 
 ### Sorting Songs
 
-![Songs sorted alphabetically by title](screenshots/sorting.png.jpg)
+![Songs sorted alphabetically by title](screenshots/sorting.jpg)
 
 ## Project Structure
 
