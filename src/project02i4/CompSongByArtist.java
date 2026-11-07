@@ -2,35 +2,21 @@ package project02i4;
 
 import java.util.Comparator;
 
-/**
- *
- * @author frank
- */
+/** Orders songs by artist, then title, then duration. */
+public class CompSongByArtist implements Comparator<Song> {
 
-// This class is designed to sort songs primarily by artist, then by title alphabetically, 
-// and finally by duration if both artist and title are the same
-public class CompSongByArtist implements Comparator<Song>{
-    
-       @Override
-    public int compare(Song s1, Song s2){
-        
-        // Compares artist first
-        int num = s1.getArtist().compareToIgnoreCase(s2.getArtist());
-        if (num!=0) {
-            return num; 
-            
+    @Override
+    public int compare(Song first, Song second) {
+        int comparison = first.getArtist().compareToIgnoreCase(second.getArtist());
+        if (comparison != 0) {
+            return comparison;
         }
-        
-        // If authors are the same, compare titles alphabetically
-        num = s1.getTitle().compareToIgnoreCase(s2.getTitle()); 
-        if (num!=0) {
-            return num; 
+
+        comparison = first.getTitle().compareToIgnoreCase(second.getTitle());
+        if (comparison != 0) {
+            return comparison;
         }
-        
-       
-        // If title and artist are the same, compare duration using compareTo from Song class
-        return s1.compareTo(s2); 
-        
+
+        return first.compareTo(second);
     }
-    
 }
