@@ -48,13 +48,21 @@ public class Song implements Comparable<Song> {
         }
     }
 
-    public String getTitle() { return title; }
-    public String getArtist() { return artist; }
-    public String getDuration() { return duration; }
+    public String getTitle() {
+        return title;
+    }
 
-    public static void addRestrictedArtist(String restrictedA) {
-        if (restrictedA != null && !restrictedArtists.contains(restrictedA)) {
-            restrictedArtists.add(restrictedA);
+    public String getArtist() {
+        return artist;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public static void addRestrictedArtist(String artist) {
+        if (artist != null && !restrictedArtists.contains(artist)) {
+            restrictedArtists.add(artist);
         }
     }
 
@@ -81,8 +89,12 @@ public class Song implements Comparable<Song> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Song)) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Song)) {
+            return false;
+        }
         Song otherSong = (Song) obj;
         return Objects.equals(title, otherSong.title)
                 && Objects.equals(artist, otherSong.artist)

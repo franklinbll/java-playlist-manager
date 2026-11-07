@@ -7,12 +7,14 @@ import java.util.Scanner;
  */
 public class PlaylistApplication {
 
+    private static final String PLAYLIST_FILE = "Playlists.txt";
+
     private final Scanner scan = new Scanner(System.in);
     private PlaylistOfPlaylists currentPlaylists;
 
     public void run() {
         addRestrictedArtists();
-        currentPlaylists = IOHandling.turnFileIntoPlaylistOfPlaylists("Playlists.txt");
+        currentPlaylists = IOHandling.turnFileIntoPlaylistOfPlaylists(PLAYLIST_FILE);
 
         boolean running = true;
 
@@ -151,15 +153,7 @@ public class PlaylistApplication {
             System.out.println("Who created it?: ");
             String artist = scan.nextLine();
 
-            String duration;
-            do {
-                System.out.println("What's its duration? ***Enter in format (mm:ss) ***");
-                duration = scan.nextLine();
-
-                if (!Song.isValidDuration(duration)) {
-                    System.out.println("Invalid duration. Use mm:ss (for example, 03:45).");
-                }
-            } while (!Song.isValidDuration(duration));
+            String duration = readDuration();
 
             Song newSong = new Song(title, artist, duration);
 
@@ -187,6 +181,17 @@ public class PlaylistApplication {
                 System.out.println("Back to main menu...");
                 System.out.println();
             }
+        }
+    }
+
+    private String readDuration() {
+        while (true) {
+            System.out.println("What's its duration? ***Enter in format (mm:ss) ***");
+            String duration = scan.nextLine();
+            if (Song.isValidDuration(duration)) {
+                return duration;
+            }
+            System.out.println("Invalid duration. Use mm:ss (for example, 03:45).");
         }
     }
 
@@ -295,7 +300,7 @@ public class PlaylistApplication {
 
     private void saveChanges() {
         currentPlaylists.removeRestrictedSongs();
-        IOHandling.writePlaylistsToFile(currentPlaylists, "Playlists.txt");
+        IOHandling.writePlaylistsToFile(currentPlaylists, PLAYLIST_FILE);
     }
 
     /**

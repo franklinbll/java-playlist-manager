@@ -14,56 +14,76 @@ public class PlaylistOfPlaylists {
 
     public boolean isInListOfPlaylists(String name) {
         for (Playlist playlist : playlistList) {
-            if (playlist.getName().equals(name)) return true;
+            if (playlist.getName().equals(name)) {
+                return true;
+            }
         }
         return false;
     }
 
     public void addPlaylist(Playlist playlist) {
-        if (playlist != null) playlistList.add(playlist);
+        if (playlist != null) {
+            playlistList.add(playlist);
+        }
     }
 
     public void removePlaylistByName(String name) {
         playlistList.removeIf(playlist -> playlist.getName().equals(name));
     }
 
-    public void removePlaylistByIndex(int i) {
-        if (i >= 0 && i < playlistList.size()) playlistList.remove(i);
+    public void removePlaylistByIndex(int index) {
+        if (index >= 0 && index < playlistList.size()) {
+            playlistList.remove(index);
+        }
     }
 
     public Playlist getPlaylistByName(String name) {
         for (Playlist playlist : playlistList) {
-            if (playlist.getName().equals(name)) return playlist;
+            if (playlist.getName().equals(name)) {
+                return playlist;
+            }
         }
         return null;
     }
 
-    public int getNumberOfPlaylists() { return playlistList.size(); }
+    public int getNumberOfPlaylists() {
+        return playlistList.size();
+    }
 
-    public Playlist getPlaylistByIndex(int i) {
-        if (i < 0 || i >= playlistList.size()) return null;
-        return playlistList.get(i);
+    public Playlist getPlaylistByIndex(int index) {
+        if (index < 0 || index >= playlistList.size()) {
+            return null;
+        }
+        return playlistList.get(index);
     }
 
     public void removeRestrictedSongs() {
-        for (Playlist playlist : playlistList) playlist.removeSongsByIsRestricted();
+        for (Playlist playlist : playlistList) {
+            playlist.removeSongsByIsRestricted();
+        }
     }
 
     public String toCSV() {
         StringBuilder result = new StringBuilder();
-        for (Playlist playlist : playlistList) result.append(playlist.toCSV()).append("\n");
+        for (Playlist playlist : playlistList) {
+            result.append(playlist.toCSV()).append("\n");
+        }
         return result.toString();
     }
 
     public static PlaylistOfPlaylists fromCSV(String data) {
         PlaylistOfPlaylists result = new PlaylistOfPlaylists();
-        if (data == null || data.isBlank()) return result;
+        if (data == null || data.isBlank()) {
+            return result;
+        }
 
         String[] lines = data.split("\\R");
         for (String line : lines) {
-            if (line.isBlank()) continue;
+            if (line.isBlank()) {
+                continue;
+            }
             Playlist playlist = Playlist.fromCSV(line);
-            if (playlist != null) result.addPlaylist(playlist);
+            result.addPlaylist(playlist);
         }
         return result;
     }
