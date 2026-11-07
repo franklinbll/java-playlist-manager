@@ -2,7 +2,7 @@
 
 A Java console application for organizing playlists and song information. Originally developed in 2024 as a college programming final project, it was later revisited to improve readability, organization, and input handling while keeping its original scope.
 
-The project demonstrates core Java programming through a menu-driven application with local file storage.
+The project demonstrates core Java programming through a menu-driven application with local file storage. Playback is simulated with console messages; it does not play audio files.
 
 ## Features
 
@@ -12,7 +12,7 @@ The project demonstrates core Java programming through a menu-driven application
 - Display each playlist's total duration.
 - Simulate playing the songs in a playlist.
 - Validate numeric menu choices and song durations.
-- Prevent songs by predefined restricted artists from being added.
+- Apply a fixed, simulated restricted-artist rule.
 - Load playlists at startup and save after changes and when exiting through the menu.
 
 ## Technologies Used
@@ -34,7 +34,7 @@ java -version
 javac -version
 ```
 
-Requires Java 11 or later. Compilation and console workflows were checked with JDK 21.0.1.
+The source requires Java 11 or later because it uses `String.isBlank()`. Compilation and console workflows were checked with JDK 21.0.1.
 
 ### Download and Run
 
@@ -69,34 +69,36 @@ For example:
 
 Most actions return to the main menu. Adding and deleting songs offer an option to continue with another song.
 
+Songs are saved as comma-separated fields, with one playlist per line: the playlist name followed by repeating title, artist, and duration groups. This is a simple custom format, not a full CSV implementation with quoting or escaping.
+
 ## Screenshots
 
 ### Main Menu
 
-![Main menu showing playlists, total durations, and available actions](screenshots/main-menu.png.jpg)
+![Main menu showing playlists and durations](screenshots/main-menu.png.jpg)
 
 ### Playlist Management
 
-![Selected playlist showing its songs and editing options](screenshots/playlist-management.png.jpg)
+![Playlist management and editing options](screenshots/playlist-management.png.jpg)
 
-### Sorting by Title
+### Sorting Songs
 
-![Playlist before and after sorting songs alphabetically by title](screenshots/sorting.png.jpg)
+![Songs sorted alphabetically by title](screenshots/sorting.png.jpg)
 
 ## Project Structure
 
 All Java source files are in `src/project02i4/`.
 
-| Class | Responsibility |
-| --- | --- |
-| `Project02i4` | Starts the application. |
-| `PlaylistApplication` | Displays menus, reads input, and coordinates changes and saves. |
-| `Song` | Stores song details, validates durations, and defines equality and duration ordering. |
-| `Playlist` | Manages songs, sorting, total duration, and conversion to and from saved text. |
-| `PlaylistOfPlaylists` | Manages the collection of playlists and its text representation. |
-| `IOHandling` | Reads and writes the playlist data file. |
-| `CompSongByTitle` | Compares songs by title, then artist, then duration. |
-| `CompSongByArtist` | Compares songs by artist, then title, then duration. |
+| Class                 | Responsibility                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------- |
+| `Project02i4`         | Starts the application.                                                               |
+| `PlaylistApplication` | Displays menus, reads input, and coordinates changes and saves.                       |
+| `Song`                | Stores song details, validates durations, and defines equality and duration ordering. |
+| `Playlist`            | Manages songs, sorting, total duration, and conversion to and from saved text.        |
+| `PlaylistOfPlaylists` | Manages the collection of playlists and its text representation.                      |
+| `IOHandling`          | Reads and writes the playlist data file.                                              |
+| `CompSongByTitle`     | Compares songs by title, then artist, then duration.                                  |
+| `CompSongByArtist`    | Compares songs by artist, then title, then duration.                                  |
 
 `bin/` holds compiled classes and is excluded from Git. `.vscode/` contains optional editor and launch settings.
 
@@ -112,6 +114,7 @@ All Java source files are in `src/project02i4/`.
 
 ## Limitations
 
-- **Simulated playback:** Playing a playlist prints console messages; no audio files are played.
-- **Simple local storage:** Playlists are saved in a single text file without automatic backups. Names, titles, and artists should not contain commas or line breaks, which the format cannot handle.
-- **Predefined artist restrictions:** A fixed list of artist names is matched exactly, including capitalization and spaces. Restricted songs loaded from a file are removed on the next save. This is a simulated rule, not a real licensing system.
+- Music playback is simulated through console messages.
+- Playlists are stored locally in a simple text format, which has limitations with certain special characters.
+- Artist restrictions are predefined and do not represent a real licensing system.
+- This is an educational project developed to practice core Java programming concepts.
